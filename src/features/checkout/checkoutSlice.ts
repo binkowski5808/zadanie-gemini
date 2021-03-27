@@ -22,12 +22,12 @@ export const checkoutSlice = createSlice({
       state.creditCardChosen = action.payload;
     },
     nextStep: (state) => {
-      state.currentStep = +1;
+      state.currentStep += 1;
     },
     prevStep: (state) => {
-      state.currentStep = -1;
+      state.currentStep -= 1;
     },
-    pay: (state, action: PayloadAction<CreditCard>) => {
+    pay: (state) => {
       state.status = "loading";
     },
     paymentSuccessful: (state) => {
@@ -48,5 +48,11 @@ export const {
   paymentFailed,
   paymentSuccessful,
 } = checkoutSlice.actions;
+
+export const selectPaymentStatus = (state: RootState) => state.checkout.status;
+export const selectCreditCardChosen = (state: RootState) =>
+  state.checkout.creditCardChosen;
+export const selectCurrentStep = (state: RootState) =>
+  state.checkout.currentStep;
 
 export default checkoutSlice.reducer;
