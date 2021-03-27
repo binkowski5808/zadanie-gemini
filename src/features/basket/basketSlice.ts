@@ -35,6 +35,7 @@ export const basketSlice = createSlice({
     getBasket: (state) => {
       state.status = "loading";
     },
+    resetBasket: (state) => initialState,
   },
 });
 
@@ -42,6 +43,7 @@ export const {
   getBasket,
   basketReceived,
   basketReceivingFailed,
+  resetBasket,
 } = basketSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
@@ -51,5 +53,7 @@ export const selectBasketProducts = (state: RootState) => state.basket.products;
 export const selectNumberOfProductsInBasket = (state: RootState) =>
   state.basket.products.length;
 export const selectBasketStatus = (state: RootState) => state.basket.status;
+export const selectTotalCostOfProducts = (state: RootState) =>
+  state.basket.products.reduce((total, product) => total + product.price, 0);
 
 export default basketSlice.reducer;
