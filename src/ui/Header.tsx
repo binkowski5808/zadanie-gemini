@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@chakra-ui/button";
+import { IconButton } from "@chakra-ui/button";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Flex, Heading, Link, Spacer } from "@chakra-ui/layout";
