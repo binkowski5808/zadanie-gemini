@@ -8,12 +8,12 @@ import CreditCardForm from "../creditCards/CreditCardForm";
 import { pay, prevStep, selectPaymentStatus } from "./checkoutSlice";
 import { resetAddCreditCardStatus } from "../creditCards/creditCardsSlice";
 
+const MotionButton = motion(Button);
+
 const PaymentStep = () => {
   const paymentStatus = useSelector(selectPaymentStatus);
   const dispatch = useDispatch();
   const [openedAddCreditCard, setOpenedAddCreditCard] = useState(false);
-
-  const MotionButton = motion(Button);
 
   return (
     <Flex flexDir="column" align="center">
