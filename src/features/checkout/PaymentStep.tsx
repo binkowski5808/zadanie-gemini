@@ -21,9 +21,7 @@ const PaymentStep = () => {
       <MotionButton
         mt={3}
         onClick={() => {
-          openedAddCreditCard
-            ? setOpenedAddCreditCard(false)
-            : setOpenedAddCreditCard(true);
+          setOpenedAddCreditCard(!openedAddCreditCard);
           dispatch(resetAddCreditCardStatus());
         }}
         width="xs"
