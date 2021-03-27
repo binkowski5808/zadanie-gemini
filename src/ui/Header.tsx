@@ -19,6 +19,8 @@ const Header = () => {
       </Flex>
       <Spacer />
       <IconButton
+        size="lg"
+        mr={4}
         aria-label="Zmiana trybu kolorów"
         icon={colorModeIcon}
         onClick={toggleColorMode}
