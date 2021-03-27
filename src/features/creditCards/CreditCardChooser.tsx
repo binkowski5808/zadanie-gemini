@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   choseCreditCard,
   selectCreditCardChosen,
-  selectDirection,
 } from "../checkout/checkoutSlice";
 import {
   selectCreditCards,
@@ -27,7 +26,7 @@ const CreditCardChooser = () => {
   const creditCards = useSelector(selectCreditCards);
   const getCreditCardsStatus = useSelector(selectGetCreditCardsStatus);
   const creditCardChosen = useSelector(selectCreditCardChosen);
-  const direction = useSelector(selectDirection);
+  const [direction, setDirection] = useState(0);
 
   const getCreditCardChosenIndex = () => {
     if (creditCardChosen) {
@@ -56,6 +55,7 @@ const CreditCardChooser = () => {
 
   const paginate = (newDirection: number) => {
     dispatch(choseCreditCard(creditCards[creditCardIndex + newDirection]));
+    setDirection(newDirection);
   };
   return (
     <>
