@@ -10,7 +10,7 @@ import { getBasket } from "./features/basket/basketSlice";
 function App() {
   const dispatch = useDispatch();
   return (
-    <Flex h="100vh" flexDir="column">
+    <Flex h="100vh" flexDir="column" w="100vw">
       <Header />
       <Flex
         as="main"
