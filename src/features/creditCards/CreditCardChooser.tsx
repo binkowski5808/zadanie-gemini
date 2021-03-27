@@ -13,7 +13,6 @@ import {
 } from "./creditCardsSlice";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
-import { CreditCard } from "../../sagas/requests/creditCardsRequests";
 import { IconButton } from "@chakra-ui/button";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
@@ -23,20 +22,6 @@ import {
   swipePower,
 } from "../../app/helpers";
 
-const getCreditCardChosenIndex = (
-  creditCardChosen: CreditCard | undefined,
-  creditCards: CreditCard[]
-) => {
-  if (creditCardChosen) {
-    const index = creditCards.findIndex(
-      (creditCard) => creditCard.number === creditCardChosen.number
-    );
-    if (index === -1) return 0;
-    return index;
-  }
-  return 0;
-};
-
 const CreditCardChooser = () => {
   const dispatch = useDispatch();
   const creditCards = useSelector(selectCreditCards);
@@ -44,19 +29,30 @@ const CreditCardChooser = () => {
   const creditCardChosen = useSelector(selectCreditCardChosen);
   const direction = useSelector(selectDirection);
 
+  const getCreditCardChosenIndex = () => {
+    if (creditCardChosen) {
+      const index = creditCards.findIndex(
+        (creditCard) => creditCard.number === creditCardChosen.number
+      );
+      if (index === -1) return 0;
+      return index;
+    }
+    return 0;
+  };
   const [creditCardIndex, setCreditCardIndex] = useState(
-    getCreditCardChosenIndex(creditCardChosen, creditCards)
+    getCreditCardChosenIndex()
   );
-
   useEffect(() => {
-    setCreditCardIndex(getCreditCardChosenIndex(creditCardChosen, creditCards));
-  }, [creditCardChosen, creditCards]);
-
-  useEffect(() => {
-    //Initial choice for credit card
-    dispatch(choseCreditCard(creditCards[creditCardIndex]));
+    setCreditCardIndex(getCreditCardChosenIndex());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [creditCardChosen]);
+
+  useEffect(() => {
+    //Initial choice for credit card depended on status of api call
+    getCreditCardsStatus === "success" &&
+      dispatch(choseCreditCard(creditCards[creditCardIndex]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getCreditCardsStatus]);
 
   const paginate = (newDirection: number) => {
     dispatch(choseCreditCard(creditCards[creditCardIndex + newDirection]));

@@ -112,7 +112,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               type="text"
               placeholder="Numer Karty"
               ref={register}
-              autocomplete="cc-number"
+              autoComplete="cc-number"
             />
             <FormHelperText mt={1}>
               5500 0000 0000 0004 - ten poprawny
@@ -135,7 +135,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               type="text"
               placeholder="Name"
               ref={register}
-              autocomplete="cc-name"
+              autoComplete="cc-name"
             />
             <FormErrorMessage mt={1}>{errors?.name?.message}</FormErrorMessage>
           </FormControl>
@@ -145,7 +145,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
             p={1}
             isRequired
           >
-            <FormLabel for="frmCCExp">Wygaśnięcie karty</FormLabel>
+            <FormLabel htmlFor="frmCCExp">Wygaśnięcie karty</FormLabel>
             <Input
               onFocus={() => setFieldFocused("expiry")}
               name="expiry"
@@ -153,7 +153,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               ref={register}
               type="text"
               placeholder="Valid Thru"
-              autocomplete="cc-exp"
+              autoComplete="cc-exp"
             />
             <FormErrorMessage mt={1}>
               {errors?.expiry?.message}
@@ -165,7 +165,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
             p={1}
             isRequired
           >
-            <FormLabel for="frmCCCVC">Numer CVC</FormLabel>
+            <FormLabel htmlFor="frmCCCVC">Numer CVC</FormLabel>
             <Input
               onFocus={() => setFieldFocused("cvc")}
               id="frmCCCVC"
@@ -173,7 +173,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               ref={register}
               component="input"
               placeholder="CVC"
-              autocomplete="cc-csc"
+              autoComplete="cc-csc"
             />
             <FormErrorMessage mt={1}>{errors?.cvc?.message}</FormErrorMessage>
           </FormControl>
