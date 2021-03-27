@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CreditCardChooser from "../creditCards/CreditCardChooser";
 import CreditCardForm from "../creditCards/CreditCardForm";
 import { pay, prevStep, selectPaymentStatus } from "./checkoutSlice";
+import { resetAddCreditCardStatus } from "../creditCards/creditCardsSlice";
 
 const PaymentStep = () => {
   const paymentStatus = useSelector(selectPaymentStatus);
@@ -19,17 +20,18 @@ const PaymentStep = () => {
       <CreditCardChooser />
       <MotionButton
         mt={3}
-        onClick={() =>
+        onClick={() => {
           openedAddCreditCard
             ? setOpenedAddCreditCard(false)
-            : setOpenedAddCreditCard(true)
-        }
+            : setOpenedAddCreditCard(true);
+          dispatch(resetAddCreditCardStatus());
+        }}
         width="xs"
         whileHover={{ scale: 1.2 }}
       >
         {openedAddCreditCard ? "Zamknij" : "Dodaj kartę płatniczą"}
       </MotionButton>
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
         {openedAddCreditCard && (
           <motion.div
             initial={{ opacity: 0 }}

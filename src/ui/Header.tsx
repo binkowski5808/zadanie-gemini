@@ -4,8 +4,11 @@ import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Flex, Heading, Link, Spacer } from "@chakra-ui/layout";
 import { useMediaQuery } from "@chakra-ui/media-query";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
+import { motion } from "framer-motion";
 import React from "react";
 import Basket from "../features/basket/Basket";
+
+const MotionIconButton = motion(IconButton);
 
 const Header = () => {
   const { toggleColorMode } = useColorMode();
@@ -50,7 +53,8 @@ const Header = () => {
         </Flex>
       )}
       <Spacer />
-      <IconButton
+      <MotionIconButton
+        whileHover={{ scale: 1.2 }}
         size="lg"
         mr={4}
         aria-label="Zmiana trybu kolorów"

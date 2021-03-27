@@ -44,6 +44,9 @@ export const creditCardsSlice = createSlice({
     creditCardAddingFailed: (state) => {
       state.statusAddCreditCards = "error";
     },
+    resetAddCreditCardStatus: (state) => {
+      state.statusAddCreditCards = "idle";
+    },
   },
 });
 
@@ -54,6 +57,7 @@ export const {
   addCreditCard,
   creditCardAdded,
   creditCardAddingFailed,
+  resetAddCreditCardStatus,
 } = creditCardsSlice.actions;
 
 export const selectCreditCards = (state: RootState) =>

@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import Payment from "payment";
 import { Flex } from "@chakra-ui/layout";
-import { AnimatePresence, motion } from "framer-motion";
 
 interface CreditCardFormProps {
   submitCallback(): void;

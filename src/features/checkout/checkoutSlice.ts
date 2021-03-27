@@ -6,12 +6,14 @@ interface CheckoutState {
   creditCardChosen?: CreditCard;
   status: "idle" | "loading" | "success" | "error";
   currentStep: number;
+  direction: number;
 }
 
 const initialState: CheckoutState = {
   creditCardChosen: undefined,
   status: "idle",
   currentStep: 0,
+  direction: 0,
 };
 
 export const checkoutSlice = createSlice({
@@ -23,9 +25,11 @@ export const checkoutSlice = createSlice({
     },
     nextStep: (state) => {
       state.currentStep += 1;
+      state.direction = 1;
     },
     prevStep: (state) => {
       state.currentStep -= 1;
+      state.direction = -1;
     },
     pay: (state) => {
       state.status = "loading";
@@ -55,5 +59,6 @@ export const selectCreditCardChosen = (state: RootState) =>
   state.checkout.creditCardChosen;
 export const selectCurrentStep = (state: RootState) =>
   state.checkout.currentStep;
+export const selectDirection = (state: RootState) => state.checkout.direction;
 
 export default checkoutSlice.reducer;
