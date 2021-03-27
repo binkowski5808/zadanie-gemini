@@ -17,7 +17,9 @@ const PaymentStep = () => {
       <Button onClick={() => setOpenedAddCreditCard(true)}>
         Dodaj kartę płatniczą
       </Button>
-      {openedAddCreditCard && <CreditCardForm />}
+      {openedAddCreditCard && (
+        <CreditCardForm submitCallback={() => setOpenedAddCreditCard(false)} />
+      )}
       <Button onClick={() => dispatch(prevStep())}>Wróć</Button>
       <Button
         onClick={() => dispatch(pay())}
