@@ -1,13 +1,14 @@
-import { Button, IconButton } from "@chakra-ui/button";
+import { Button } from "@chakra-ui/button";
 import { LightMode } from "@chakra-ui/color-mode";
 import { useDisclosure } from "@chakra-ui/hooks";
 import Icon from "@chakra-ui/icon";
-import { Badge, Flex, Text } from "@chakra-ui/layout";
+import { Badge, Text } from "@chakra-ui/layout";
 import React from "react";
 import { FaShoppingBasket } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Drawer from "../../ui/Drawer";
 import Checkout from "../checkout/Checkout";
+import { selectPaymentStatus, resetCheckout } from "../checkout/checkoutSlice";
 import {
   selectBasketStatus,
   selectNumberOfProductsInBasket,
@@ -16,6 +17,8 @@ import {
 const Basket = () => {
   const basketStatus = useSelector(selectBasketStatus);
   const numberOfProducts = useSelector(selectNumberOfProductsInBasket);
+  const paymentStatus = useSelector(selectPaymentStatus);
+  const dispatch = useDispatch();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
@@ -47,7 +50,10 @@ const Basket = () => {
       </Button>
       <Drawer
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          onClose();
+          paymentStatus === "success" && dispatch(resetCheckout());
+        }}
         headerText="Finalizacja zamówienia"
       >
         <Checkout />

@@ -1,5 +1,5 @@
 import { createStandaloneToast } from "@chakra-ui/toast";
-import { takeLatest, call, put, select } from "@redux-saga/core/effects";
+import { takeLatest, call, put, select, delay } from "@redux-saga/core/effects";
 import { SagaReturnType } from "redux-saga/effects";
 import { choseCreditCard } from "../../features/checkout/checkoutSlice";
 import {
@@ -19,6 +19,7 @@ import {
 export function* fetchCreditCards() {
   const toast = createStandaloneToast();
   try {
+    yield delay(3000);
     const res: SagaReturnType<typeof requestCreditCards> = yield call(
       requestCreditCards
     );

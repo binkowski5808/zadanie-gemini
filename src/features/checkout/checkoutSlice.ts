@@ -47,6 +47,7 @@ export const {
   pay,
   paymentFailed,
   paymentSuccessful,
+  resetCheckout,
 } = checkoutSlice.actions;
 
 export const selectPaymentStatus = (state: RootState) => state.checkout.status;

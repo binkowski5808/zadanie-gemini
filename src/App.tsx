@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Flex, Text } from "@chakra-ui/layout";
@@ -6,9 +6,13 @@ import { Button } from "@chakra-ui/button";
 import Header from "./ui/Header";
 import { useDispatch } from "react-redux";
 import { getBasket } from "./features/basket/basketSlice";
+import { getCreditCards } from "./features/creditCards/creditCardsSlice";
 
 function App() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCreditCards());
+  }, [dispatch]);
   return (
     <Flex h="100vh" flexDir="column" w="100vw">
       <Header />
