@@ -7,6 +7,7 @@ import BasketSummaryStep from "./BasketSummaryStep";
 import { selectCurrentStep, selectDirection } from "./checkoutSlice";
 import PaymentStep from "./PaymentStep";
 import PaymentSummaryStep from "./PaymentSummaryStep";
+const MotionFlex = motion(Flex);
 
 const Checkout = () => {
   const steps = [
@@ -26,8 +27,6 @@ const Checkout = () => {
 
   const currentStep = useSelector(selectCurrentStep);
   const direction = useSelector(selectDirection);
-
-  const MotionFlex = motion(Flex);
 
   return (
     <AnimatePresence initial={false} custom={direction}>
