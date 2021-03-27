@@ -1,3 +1,5 @@
+https://zadanie-gemini.netlify.app/
+
 npm install --legacy-peer-deps
 Ponieważ react-credit-cards nie podbiło dependency react'a na wersję 17 :(
 
