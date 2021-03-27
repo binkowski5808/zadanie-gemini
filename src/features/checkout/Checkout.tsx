@@ -26,7 +26,9 @@ const Checkout = () => {
 
   return (
     <Flex flex="1 1 100%" flexDir="column" align="center">
-      <Heading flex="1 1 auto">{steps[currentStep].title}</Heading>
+      <Heading fontSize="x-large" flex="1 1 auto">
+        {steps[currentStep].title}
+      </Heading>
       <Flex flex="1 1 100%">{steps[currentStep].content}</Flex>
     </Flex>
   );
