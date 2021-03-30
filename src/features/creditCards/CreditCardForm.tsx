@@ -24,7 +24,7 @@ interface CreditCardFormProps {
 const schema = yup.object().shape({
   number: yup
     .string()
-    .test("isValidNumber", "Numer kart jest niepoprawny", (value, context) =>
+    .test("isValidNumber", "Numer kart jest niepoprawny", (value) =>
       value ? Payment.fns.validateCardNumber(value) : false
     )
     .required("Numer karty jest wymagany"),
@@ -34,13 +34,13 @@ const schema = yup.object().shape({
     .required("Nazwisko na karcie jest wymagane"),
   expiry: yup
     .string()
-    .test("isValidExpiry", "Data ważności jest niepoprawna", (value, context) =>
+    .test("isValidExpiry", "Data ważności jest niepoprawna", (value) =>
       value ? Payment.fns.validateCardExpiry(value) : false
     )
     .required("Data wygaśnięcia jest wymagana"),
   cvc: yup
     .string()
-    .test("isValidCVC", "Numer CVC jest niepoprawny", (value, context) =>
+    .test("isValidCVC", "Numer CVC jest niepoprawny", (value) =>
       value ? Payment.fns.validateCardCVC(value) : false
     )
     .required("Numer CVC jest wymagany"),
@@ -59,7 +59,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
     watch,
     formState,
   } = useForm<CreditCard>({
-    mode: "onBlur",
+    mode: "onChange",
     resolver: yupResolver(schema),
   });
 
@@ -93,7 +93,7 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
         <Card
           number={watchAllFields.number || ""}
           name={watchAllFields.name || ""}
-          expiry={watchAllFields.expiry || ""}
+          expiry={watchAllFields.expiry?.replace(/\s/g, "") || ""}
           cvc={watchAllFields.cvc || ""}
           focused={fieldFocused}
         />
@@ -111,8 +111,12 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               name="number"
               type="text"
               placeholder="Numer Karty"
+              onChange={(e) => {
+                e.target = Payment.formatCardNumber(e.target);
+              }}
               ref={register}
               autoComplete="cc-number"
+              pattern="\d*"
             />
             <FormHelperText mt={1}>
               5500 0000 0000 0004 - ten poprawny
@@ -151,9 +155,13 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               name="expiry"
               id="frmCCExp"
               ref={register}
+              onChange={(e) => {
+                Payment.formatCardExpiry(e.target);
+              }}
               type="text"
               placeholder="Valid Thru"
               autoComplete="cc-exp"
+              pattern="\d*"
             />
             <FormErrorMessage mt={1}>
               {errors?.expiry?.message}
@@ -172,8 +180,12 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               name="cvc"
               ref={register}
               component="input"
+              onChange={(e) => {
+                e.target = Payment.formatCardCVC(e.target);
+              }}
               placeholder="CVC"
               autoComplete="cc-csc"
+              pattern="\d*"
             />
             <FormErrorMessage mt={1}>{errors?.cvc?.message}</FormErrorMessage>
           </FormControl>
