@@ -9,22 +9,22 @@ import PaymentStep from "./PaymentStep";
 import PaymentSummaryStep from "./PaymentSummaryStep";
 const MotionFlex = motion(Flex);
 
-const Checkout = () => {
-  const steps = [
-    {
-      title: "Podsumowanie zamówienia",
-      content: <BasketSummaryStep />,
-    },
-    {
-      title: "Karta płatnicza",
-      content: <PaymentStep />,
-    },
-    {
-      title: "Podsumowanie płatności",
-      content: <PaymentSummaryStep />,
-    },
-  ];
+const steps = [
+  {
+    title: "Podsumowanie zamówienia",
+    content: <BasketSummaryStep />,
+  },
+  {
+    title: "Karta płatnicza",
+    content: <PaymentStep />,
+  },
+  {
+    title: "Podsumowanie płatności",
+    content: <PaymentSummaryStep />,
+  },
+];
 
+const Checkout = () => {
   const currentStep = useSelector(selectCurrentStep);
   const direction = useSelector(selectDirection);
 

@@ -45,7 +45,9 @@ export function* fetchPostCreditCard(action: ReturnType<typeof addCreditCard>) {
     );
     if (
       creditCards.some(
-        (creditCard) => creditCard.number === action.payload.number
+        (creditCard) =>
+          creditCard.number.replace(/\s/g, "") ===
+          action.payload.number.replace(/\s/g, "")
       )
     ) {
       yield call(toast, {

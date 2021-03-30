@@ -14,7 +14,6 @@ const Header = () => {
   const { toggleColorMode } = useColorMode();
   const colorModeIcon = useColorModeValue(<MoonIcon />, <SunIcon />);
 
-  //Najmniejszy tablet ma 768px
   const [isLargerThan767] = useMediaQuery("(min-width: 767px)");
 
   return (
