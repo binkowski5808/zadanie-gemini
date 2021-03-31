@@ -161,7 +161,6 @@ const CreditCardForm: React.FC<CreditCardFormProps> = ({ submitCallback }) => {
               type="text"
               placeholder="Valid Thru"
               autoComplete="cc-exp"
-              pattern="\d*"
             />
             <FormErrorMessage mt={1}>
               {errors?.expiry?.message}
